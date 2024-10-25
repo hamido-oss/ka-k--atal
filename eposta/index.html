@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üye Girişi ve Kayıt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a5e61;
+        }
+    </style>
+</head>
+<body>
+    <h1>Üye Girişi ve Kayıt</h1>
+
+    <div class="form-container">
+        <h2>Kayıt Ol</h2>
+        <form id="registerForm">
+            <input type="text" id="registerName" placeholder="Adınız" required>
+            <input type="email" id="registerEmail" placeholder="E-posta" required>
+            <input type="password" id="registerPassword" placeholder="Şifre" required>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <h2>Giriş Yap</h2>
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="E-posta" required>
+            <input type="password" id="loginPassword" placeholder="Şifre" required>
+            <button type="submit">Giriş Yap</button>
+        </form>
+    </div>
+
+    <script>
+        // Kullanıcı bilgilerini tutmak için bir nesne
+        const users = {};
+
+        // Kayıt olma formunu işleme
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            // Kullanıcı bilgilerini kaydet
+            users[email] = { name, password };
+
+            alert('Kayıt başarılı!');
+            this.reset();
+        });
+
+        // Giriş yapma formunu işleme
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Kullanıcıyı kontrol et
+            if (users[email] && users[email].password === password) {
+                alert(`Hoş geldiniz, ${users[email].name}!`);
+            } else {
+                alert('Geçersiz e-posta veya şifre!');
+            }
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
